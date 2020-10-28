@@ -31,3 +31,9 @@
 
 en:
   hello: "Hello world"
+  active_admin:
+    resources:
+      upload:
+        new_model: "Upload File"
+        show_mode: "Show File"
+        delete_model: "Delete File"
