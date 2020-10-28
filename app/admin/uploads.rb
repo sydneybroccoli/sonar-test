@@ -16,9 +16,7 @@ ActiveAdmin.register Upload, as: "Files" do
       selectable_column
       column :id
       column "Author", :user_id
-      column :filename
-      column :filetype
-      column :filepath
+      column :name
       column "Uploaded At", :created_at
   end
 
@@ -27,12 +25,18 @@ ActiveAdmin.register Upload, as: "Files" do
   end
 
   # FORM
-  form title: 'UPLOAD A FILE' do |f|
-    f.inputs "FILE" do
-      f.input :filepath, label: "FILEPATH URL"
+  form title: 'UPLOAD NEW FILE' do |f|
+    f.inputs "FILE DETAILS" do
+      f.input :uploads, as: :file, required: true
       li "UPLOADED @ #{f.object.created_at}" unless f.object.new_record?
     end
     f.actions
   end
   
 end
+
+# upload.file.attach(
+#   io: File.open("FILEPATH_URL"),
+#   filename: "FILENAME.EXT",
+#   content_type: "csv"
+# )

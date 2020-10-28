@@ -20,26 +20,16 @@ User.create!(
   admin: true
 )
 
-2.times do |n|
-  user = User.where(admin: false).first
-  file = Upload.create!(
-    filename: "file_#{n + 1}",
-    filetype: "csv",
-    filepath: "file_#{n + 1}.csv",
-    user_id: user.id
-  )
-end
+tmp = Upload.create( name: 'file_upload' )
+tmp.user_id = User.all[1].id
+tmp.file.attach(
+  io: File.open("./app/assets/development/cars.csv"),
+  filename: "cars.csv",
+  content_type: "csv"
+)
+tmp.save!
 
-3.times do |n|
-  user = User.where(admin: true).first
-  file = Upload.create!(
-    filename: "upload_#{n + 1}",
-    filetype: "csv",
-    filepath: "upload_#{n + 1}.csv",
-    user_id: user.id
-  )
-end
-
+# PRINT RESULTS
 if User.all.empty? then
   puts "\tWARNING: YOUR DB CONTAINS NO USERS"
 else
